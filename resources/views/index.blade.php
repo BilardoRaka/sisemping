@@ -3,7 +3,7 @@
 
     <head>
         <meta charset="utf-8">
-        <meta name="author" content="Simahanku">
+        <meta name="author" content="Sisemping">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="Simahanku">
         <!-- Fav Icon  -->
@@ -20,10 +20,53 @@
 
     <body>
         @include('layout.header-index')
-        <script src="{{ asset('assets/js/bundle.js?ver=3.1.0') }}"></script>
-        <script src="{{ asset('assets/js/scripts.js?ver=3.1.0') }}"></script>
-        <script src="{{ asset('assets/js/charts/gd-default.js?ver=3.1.0') }}"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    </body>
+        @if($renters->count() != null)
+        <div class="nk-block p-3">
+            <div class="row g-gs">
+                @foreach($renters as $renter)
+                <div class="col-sm-12 col-lg-6 col-xxl-4">
+                    <div class="card card-bordered h-100">
+                        <div class="card-inner">
+                            <div class="project">
+                                <div class="project-head">
+                                    <a href="html/apps-kanban.html" class="project-title">
+                                        <div class="user-avatar sq bg-purple">
+                                            <span>
+                                                {{ substr($renter->name,0,2) }}
+                                            </span>
+                                        </div>
+                                        <div class="project-info">
+                                            <h6 class="title">{{ $renter->name }}</h6>
+                                            <span class="sub-text">{{ $renter->city->name }}</span>
+                                        </div>
+                                    </a>
+                                </div>
+                                <hr>
+                                <div class="project-details">
+                                    <p>
+                                        Kontak Penyewa: <br>
+                                        <span class="sub-text">
+                                            {{ $renter->user->email }} <br>
+                                            {{ $renter->phone }}
+                                        </span>
+                                    </p>
+                                    <p>
+                                        {{ $renter->description }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+        @else
+        <h4 class='text-center mt-5'>
+            <img src="{{ asset('images/user-not-found.jpg') }}" height="400" alt="logo">
+            <br>
+            Tidak ada penyewa di kabupaten / kota yg dipilih.
+        </h4>
+        @endif
 
-</html>
+        @include('layout.footer-index')
