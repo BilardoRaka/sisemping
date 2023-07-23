@@ -4,7 +4,9 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\MasterEquipment;
 use App\Models\Renter;
+use App\Models\RenterEquipment;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -15,7 +17,33 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $user = 10;
+        $user = 1000;
+
+        MasterEquipment::create([
+            'name' => 'Tenda',
+            'description' => fake()->sentence(15, true),
+        ]);
+
+        MasterEquipment::create([
+            'name' => 'Kompor Portable',
+            'description' => fake()->sentence(15, true),
+        ]);
+
+        MasterEquipment::create([
+            'name' => 'Selimut',
+            'description' => fake()->sentence(15, true),
+        ]);
+
+        MasterEquipment::create([
+            'name' => 'Sleeping Bag',
+            'description' => fake()->sentence(15, true),
+        ]);
+
+        MasterEquipment::create([
+            'name' => 'Senter',
+            'description' => fake()->sentence(15, true),
+        ]);
+
         User::factory($user)->create();
 
         for ($i=0; $i < $user ; $i++) { 
@@ -27,7 +55,44 @@ class DatabaseSeeder extends Seeder
                 'phone' => fake()->e164PhoneNumber(),
                 'address' => fake()->address(),
             ]);
+
+            RenterEquipment::create([
+                'renter_id' => $i+1,
+                'equipment_id' => 1,
+                'qty' => rand(3,25),
+                'price' => rand(0,1) ? 75000 : 120000,
+            ]);
+
+            RenterEquipment::create([
+                'renter_id' => $i+1,
+                'equipment_id' => 2,
+                'qty' => rand(3,25),
+                'price' => rand(0,1) ? 5000 : 7000,
+            ]);
+
+            RenterEquipment::create([
+                'renter_id' => $i+1,
+                'equipment_id' => 3,
+                'qty' => rand(3,25),
+                'price' => rand(0,1) ? 3500 : 7000,
+            ]);
+
+            RenterEquipment::create([
+                'renter_id' => $i+1,
+                'equipment_id' => 4,
+                'qty' => rand(3,25),
+                'price' => rand(0,1) ? 10000 : 25000,
+            ]);
+
+            RenterEquipment::create([
+                'renter_id' => $i+1,
+                'equipment_id' => 5,
+                'qty' => rand(3,25),
+                'price' => rand(0,1) ? 2500 : 6500,
+            ]);
         }
+
+
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',

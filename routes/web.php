@@ -15,4 +15,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index')->middleware('guest');
+Route::get('/{id}', [DashboardController::class, 'detail'])->name('dashboard.detail')->middleware('guest');
 Route::post('/city', [DashboardController::class, 'fetchCity'])->name('dashboard.fetchCity')->middleware('guest');

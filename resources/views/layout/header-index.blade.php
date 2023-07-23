@@ -10,9 +10,9 @@
                         <form action="{{ route('dashboard.index') }}" method="GET" class="d-inline">
                         <div class="form-group">
                             <div class="form-control-wrap">
-                                <select name="province_id" id="province_id" onchange="city(this.value)" class="form-select js-select2 @error('province_id') is-invalid @enderror" data-ui="lg" data-search="on">
+                                <select name="province_id" id="province_id" onchange="city(this.value)" class="form-select js-select2 @error('province_id') is-invalid @enderror" data-ui="md" data-search="on">
                                     <option value=" " disabled selected>
-                                        Pilih Salah Satu Provinsi ...
+                                        Pilih Salah Satu Provinsi
                                     </option>
                                     @foreach($provinces as $province)
                                     <option value="{{ $province->id }}" @if(request('province_id') == $province->id) selected @endif>
@@ -33,9 +33,9 @@
                     <li class="nav-item">
                         <div class="form-group">
                             <div class="form-control-wrap">
-                                <select name="city_id" id="city_id" class="form-select js-select2 @error('city_id') is-invalid @enderror" data-ui="lg" data-search="on">
+                                <select name="city_id" id="city_id" class="form-select js-select2 @error('city_id') is-invalid @enderror" data-ui="md" data-search="on">
                                     <option value=" " disabled selected>
-                                        Pilih Salah Satu Kota ...
+                                        Pilih Salah Satu Kota
                                     </option>
                                     @if(request('city_id'))
                                     @foreach($cities as $city)

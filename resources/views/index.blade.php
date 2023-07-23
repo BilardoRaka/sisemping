@@ -29,7 +29,7 @@
                         <div class="card-inner">
                             <div class="project">
                                 <div class="project-head">
-                                    <a href="html/apps-kanban.html" class="project-title">
+                                    <a href="{{ route('dashboard.detail', $renter->id) }}" class="project-title">
                                         <div class="user-avatar sq bg-purple">
                                             <span>
                                                 {{ substr($renter->name,0,2) }}
@@ -68,5 +68,9 @@
             Tidak ada penyewa di kabupaten / kota yg dipilih.
         </h4>
         @endif
+        
+        <div class='d-flex justify-content-center'>
+            {{ $renters->links() }}
+        </div>
 
         @include('layout.footer-index')

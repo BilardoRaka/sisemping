@@ -20,4 +20,9 @@ class Renter extends Model
     {
         return $this->belongsTo(City::class, 'city_id');
     }
+
+    public function renter_equipment()
+    {
+        return $this->hasMany(RenterEquipment::class,'equipment_id');
+    }
 }
