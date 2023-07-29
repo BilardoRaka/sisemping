@@ -1,6 +1,6 @@
 <header>
     <!-- Fixed navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary p-3">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-light p-3">
         <a class="navbar-brand" href="/">
             <img src="{{url('/images/sisemping.png')}}" height="40" class="d-inline-block align-top" alt="">
         </a>
@@ -37,7 +37,7 @@
                                     <option value=" " disabled selected>
                                         Pilih Salah Satu Kota
                                     </option>
-                                    @if(request('city_id'))
+                                    @if(request('city_id') or request('province_id'))
                                     @foreach($cities as $city)
                                     <option value="{{ $city->id }}" @if($city->id == request('city_id')) selected @endif>
                                         {{ $city->name }}
@@ -64,9 +64,57 @@
         <ul class="navbar-nav ms-auto">
             @guest
             <li class="nav-item">
-                <button type="button" class="btn btn-dim nav-link btn-outline-primary">Login</button>
+                <a href="{{ route('login') }}" class="btn btn-dim nav-link btn-outline-primary">Login</a>
             </li>
-            @endguest    
+            @endguest
+            @auth
+            <li class="dropdown user-dropdown">
+                <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">
+                    <div class="user-toggle">
+                        <div class="user-avatar sm">
+                            <span>{{ substr(auth()->user()->renter?->name,0,2) }}</span>
+                        </div>
+                        <div class="user-info d-none d-md-block">
+                            <div class="user-status">{{ ucfirst(auth()->user()->role) }}</div>
+                            <div class="user-name dropdown-indicator">{{ auth()->user()->renter?->name }}</div>
+                        </div>
+                    </div>
+                </a>
+                <div class="dropdown-menu dropdown-menu-md dropdown-menu-end dropdown-menu-s1">
+                    <div class="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
+                        <div class="user-card">
+                            <div class="user-avatar">
+                                <span>{{ substr(auth()->user()->renter?->name,0,2) }}</span>
+                            </div>
+                            <div class="user-info">
+                                <span class="lead-text">{{ auth()->user()->renter?->name }}</span>
+                                <span class="sub-text">{{ auth()->user()->email }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dropdown-inner">
+                        <ul class="link-list">
+                            <li>
+                                <a href="{{ route('profile.index') }}"><em class="icon ni ni-account-setting"></em><span>Edit Profile</span></a>
+                            </li>
+                            <li>
+                                <a href="{{ route('equipment.index') }}"><em class="icon ni ni-aperture"></em><span>Manage Equipment</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="dropdown-inner">
+                        <ul class="link-list">
+                            <li>
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="border-0 bg-white"><em class="icon ni ni-signout"></em><span>Logout</span></button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            @endauth
         </ul>
     </nav>
 </header>

@@ -17,25 +17,25 @@
             <div class="nk-sidebar-menu" data-simplebar>
                 <ul class="nk-menu">
                     <li class="nk-menu-item">
-                        <a href="/user" class="nk-menu-link">
+                        <a href="#" class="nk-menu-link">
                             <span class="nk-menu-icon"><em class="icon ni ni-users-fill"></em></span>
                             <span class="nk-menu-text">User</span>
                         </a>
                     </li>
                     <li class="nk-menu-item">
-                        <a href="/employee" class="nk-menu-link">
+                        <a href="#" class="nk-menu-link">
                             <span class="nk-menu-icon"><em class="icon ni ni-user-list"></em></span>
                             <span class="nk-menu-text">Karyawan</span>
                         </a>
                     </li>
                     <li class="nk-menu-item">
-                        <a href="/customer" class="nk-menu-link">
+                        <a href="#" class="nk-menu-link">
                             <span class="nk-menu-icon"><em class="icon ni ni-user-list-fill"></em></span>
                             <span class="nk-menu-text">Pelanggan</span>
                         </a>
                     </li>
                     <li class="nk-menu-item">
-                        <a href="/supplier" class="nk-menu-link">
+                        <a href="#" class="nk-menu-link">
                             <span class="nk-menu-icon"><em class="icon ni ni-user-fill-c"></em></span>
                             <span class="nk-menu-text">Pemasok</span>
                         </a>
@@ -44,30 +44,6 @@
                         <a href="/material" class="nk-menu-link">
                             <span class="nk-menu-icon"><em class="icon ni ni-box"></em></span>
                             <span class="nk-menu-text">Bahan Baku</span>
-                        </a>
-                    </li>
-                    <li class="nk-menu-item {{ (Request::is('type') or Request::is('type/*')) ? 'active current-page' : '' }}">
-                        <a href="/type" class="nk-menu-link">
-                            <span class="nk-menu-icon"><em class="icon ni ni-layers"></em></span>
-                            <span class="nk-menu-text">Jenis Bahan Baku</span>
-                        </a>
-                    </li>
-                    <li class="nk-menu-item {{ (Request::is('product') or Request::is('product/*')) ? 'active current-page' : '' }}">
-                        <a href="/product" class="nk-menu-link">
-                            <span class="nk-menu-icon"><em class="icon ni ni-package"></em></span>
-                            <span class="nk-menu-text">Produk</span>
-                        </a>
-                    </li>
-                    <li class="nk-menu-item">
-                        <a href="/supply" class="nk-menu-link">
-                            <span class="nk-menu-icon"><em class="icon ni ni-bag"></em></span>
-                            <span class="nk-menu-text">Suplai</span>
-                        </a>
-                    </li>
-                    <li class="nk-menu-item">
-                        <a href="/preorder" class="nk-menu-link">
-                            <span class="nk-menu-icon"><em class="icon ni ni-coins"></em></span>
-                            <span class="nk-menu-text">Preorder</span>
                         </a>
                     </li>
                 </ul>

@@ -27,24 +27,39 @@
                     {{ $renter->name }}
                 </span>
                 <br>
-                <span>
+                <span class="project-detail">
                     {{ $renter->city->province->name }}, {{ $renter->city->name }}
-                    <br>
+                </span>
+            </p>
+            <p class='fs-6'>
+                <span class='project-detail'>
+                    Alamat Lengkap Penyewa
+                </span>
+                <span class='sub-text'>
                     {{ $renter->address }}
                 </span>
             </p>
             <p class='fs-6'>
-                <span class='text-black'>
-                    Kontak Penyewa:
+                <span class='project-detail'>
+                    Deskripsi Penyewa
                 </span>
-                <br>
-                <span>
-                    {{ $renter->phone }}
+                <span class='sub-text'>
+                    {{ $renter->description }}
+                </span>
+            </p>
+            <p class='fs-6'>
+                <span class='project-detail'>
+                    Kontak Penyewa
+                </span>
+                <span class="sub-text">
+                    <a href="https://wa.me/{{ $renter->phone }}?text=Halo,%20saya%20tertarik%20untuk%20menyewa%20peralatan%20camping%20yang%20anda%20tawarkan%20di%20Sisemping." target="_blank">
+                        <em class="icon ni ni-whatsapp"></em> +{{ $renter->phone }}
+                    </a>
                     <br>
                     {{ $renter->user->email }}
                 </span>
             </p>
-            <label for='' class='form-label fs-6'>Peralatan Disewakan</label>
+            <label for='' class='project-detail fs-6'>Peralatan Disewakan</label>
             <div class='row col-6'>
                 <table class='table table-striped'>
                     <thead>

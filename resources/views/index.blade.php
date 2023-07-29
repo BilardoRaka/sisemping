@@ -20,6 +20,18 @@
 
     <body>
         @include('layout.header-index')
+        <div class="p-3">
+            @if(session()->has('failed'))
+                <div class="alert alert-danger alert-icon">
+                    <em class="icon ni ni-cross-circle"></em> {{ session('failed') }}
+                </div>
+            @endif
+            @if(session()->has('success'))
+                <div class="alert alert-success alert-icon">
+                    <em class="icon ni ni-check-circle"></em> {{ session('success') }}
+                </div>
+            @endif
+        </div>
         @if($renters->count() != null)
         <div class="nk-block p-3">
             <div class="row g-gs">
@@ -31,9 +43,13 @@
                                 <div class="project-head">
                                     <a href="{{ route('dashboard.detail', $renter->id) }}" class="project-title">
                                         <div class="user-avatar sq bg-purple">
+                                            @if($renter->logo == null)
                                             <span>
                                                 {{ substr($renter->name,0,2) }}
                                             </span>
+                                            @else
+                                                <img src="{{ asset('/storage/'.$renter->logo) }}" alt="{{ $renter->name }}">
+                                            @endif
                                         </div>
                                         <div class="project-info">
                                             <h6 class="title">{{ $renter->name }}</h6>
@@ -41,17 +57,34 @@
                                         </div>
                                     </a>
                                 </div>
+                                Alamat Lengkap
+                                <span class="sub-text">
+                                    @php 
+                                        ((strlen($renter->address)) >= 50) ? $short_address = (substr($renter->address,0,50)).'...' : $short_address = $renter->address;
+                                    @endphp
+                                    {{ $short_address }}
+                                    {{-- @if(strlen($renter->address) >= 100)
+                                        {{  }}
+                                    @else
+                                        {{ $renter->address }}
+                                    @endif --}}
+                                </span>
                                 <hr>
                                 <div class="project-details">
                                     <p>
-                                        Kontak Penyewa: <br>
+                                        Kontak Penyewa
                                         <span class="sub-text">
                                             {{ $renter->user->email }} <br>
-                                            {{ $renter->phone }}
+                                            <a href="https://wa.me/{{ $renter->phone }}?text=Halo,%20saya%20tertarik%20untuk%20menyewa%20peralatan%20camping%20yang%20anda%20tawarkan%20di%20Sisemping." target="_blank">
+                                                <em class="icon ni ni-whatsapp"></em> +{{ $renter->phone }}
+                                            </a>
                                         </span>
                                     </p>
                                     <p>
-                                        {{ $renter->description }}
+                                        @php    
+                                        ((strlen($renter->description)) >= 200) ? $short_desc = (substr($renter->description,0,200)).'...' : $short_desc = $renter->description; 
+                                        @endphp
+                                        {{ $short_desc }}
                                     </p>
                                 </div>
                             </div>

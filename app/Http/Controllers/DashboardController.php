@@ -16,18 +16,21 @@ class DashboardController extends Controller
         $city_id = $request->city_id;
         $province_id = $request->province_id;
         
-        $city = City::where('province_id', $province_id)->get();
-
-        if($city_id == null){
-            $renter = Renter::with('user','city')->latest()->paginate(6);
-        } else {
+        $city = City::where('province_id', $province_id);
+        
+        if($province_id != null && $city_id != null){
             $renter = Renter::with('user','city')->where('city_id', $city_id)->latest()->paginate(6);
+        } elseif($province_id != null && $city_id == null) {
+            $pluck = $city->pluck('id');
+            $renter = Renter::with('user','city')->whereIn('city_id', $pluck)->latest()->paginate(6);
+        } elseif($province_id == null && $city_id == null){
+            $renter = Renter::with('user','city')->latest()->paginate(6);
         }
 
         return view('index', [
             'provinces' => $province,
             'renters' => $renter,
-            'cities' => $city
+            'cities' => $city->get(),
         ]);
     }
 
