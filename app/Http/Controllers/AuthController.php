@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
+use App\Http\Requests\PasswordRequest;
 use App\Http\Requests\RegistrationRequest;
 use App\Models\City;
 use App\Models\MasterEquipment;
@@ -96,5 +97,25 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
      
         return to_route('dashboard.index')->with('success','Anda telah berhasil logout!');
+    }
+
+    public function passwordChange()
+    {
+        return view('auth.passchange');
+    }
+
+    public function passwordChangeAttempt(PasswordRequest $request)
+    {
+        $data = $request->validated();
+
+        if (!Hash::check($data['oldPassword'], auth()->user()->password)) {
+            return back()->with("failed", "Password Lama Salah!");
+        }
+
+        User::whereId(auth()->user()->id)->update([
+            'password' => Hash::make($data['newPassword'])
+        ]);
+
+        return to_route('dashboard.index')->with('success','Berhasil mengubah password anda!');
     }
 }

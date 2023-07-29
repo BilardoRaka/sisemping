@@ -72,11 +72,23 @@
                 <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">
                     <div class="user-toggle">
                         <div class="user-avatar sm">
-                            <span>{{ substr(auth()->user()->renter?->name,0,2) }}</span>
+                            <span>
+                                @if(auth()->user()->role == 'renter')
+                                {{ substr(auth()->user()->renter?->name,0,2) }}
+                                @else
+                                Ad
+                                @endif
+                            </span>
                         </div>
                         <div class="user-info d-none d-md-block">
                             <div class="user-status">{{ ucfirst(auth()->user()->role) }}</div>
-                            <div class="user-name dropdown-indicator">{{ auth()->user()->renter?->name }}</div>
+                            <div class="user-name dropdown-indicator">
+                                @if(auth()->user()->role == 'renter')
+                                {{ auth()->user()->renter?->name }}
+                                @else
+                                Administrator
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </a>
@@ -84,21 +96,44 @@
                     <div class="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
                         <div class="user-card">
                             <div class="user-avatar">
-                                <span>{{ substr(auth()->user()->renter?->name,0,2) }}</span>
+                                <span>
+                                    @if(auth()->user()->role == 'renter')
+                                    {{ substr(auth()->user()->renter?->name,0,2) }}
+                                    @else
+                                    Ad
+                                    @endif
+                                </span>
                             </div>
                             <div class="user-info">
-                                <span class="lead-text">{{ auth()->user()->renter?->name }}</span>
+                                <span class="lead-text">
+                                    @if(auth()->user()->role == 'renter')
+                                    {{ auth()->user()->renter?->name }}
+                                    @else
+                                    Administrator
+                                    @endif
+                                </span>
                                 <span class="sub-text">{{ auth()->user()->email }}</span>
                             </div>
                         </div>
                     </div>
                     <div class="dropdown-inner">
                         <ul class="link-list">
+                            @if(auth()->user()->role == 'renter')
                             <li>
                                 <a href="{{ route('profile.index') }}"><em class="icon ni ni-account-setting"></em><span>Edit Profile</span></a>
                             </li>
                             <li>
                                 <a href="{{ route('equipment.index') }}"><em class="icon ni ni-aperture"></em><span>Manage Equipment</span></a>
+                            </li>
+                            @endif
+                            @if(auth()->user()->role == 'admin')
+                            <li>
+                                <a href="{{ route('profile.renter.index') }}"><em class="icon ni ni-user-remove"></em><span>Data Renter</span></a>
+                                <a href="{{ route('master.equipment.index') }}"><em class="icon ni ni-monitor"></em><span>Master Equipment</span></a>
+                            </li>
+                            @endif
+                            <li>
+                                <a href="{{ route('passchange') }}"><em class="icon ni ni-lock-alt"></em><span>Change Password</span></a>
                             </li>
                         </ul>
                     </div>

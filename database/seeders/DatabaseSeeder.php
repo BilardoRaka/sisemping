@@ -92,11 +92,11 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
+        User::create([
+            'email' => 'fauzi@gmail.com',
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'role' => 'admin'
+        ]);
 
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
     }
 }

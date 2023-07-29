@@ -9,7 +9,7 @@
         <!-- Fav Icon  -->
         <link rel='shortcut icon' href='{{ asset('images/sisemping.png') }}'>
         <!-- Page Title  -->
-        <title>Sisemping | Index</title>
+        <title>Sisemping | Detail Penyewa</title>
         <!-- StyleSheets  -->
         <link rel='stylesheet' href='{{ asset('assets/css/dashlite.css?ver=3.1.0') }}'>
         <link id='skin-default' rel='stylesheet' href='{{ asset('assets/css/theme.css?ver=3.1.0') }}'>
