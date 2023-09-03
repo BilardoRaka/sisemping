@@ -118,8 +118,6 @@
                                                 <th style="text-align: center">No.</th>
                                                 <th style="text-align: center">Nama</th>
                                                 <th style="text-align: center">Deskripsi</th>
-                                                {{-- <th style="text-align: center">Email</th>
-                                                <th style="text-align: center">Alamat</th> --}}
                                                 <th style="text-align: center">Aksi</th>
                                             </tr>
                                         </thead>
@@ -129,15 +127,14 @@
                                                     <td align="center" class="nk-tb-col tb-col-mb">{{ $equipments->firstItem()+$loop->index }}</td>
                                                     <td class="nk-tb-col tb-col-mb">{{ $equipment->name }}</td>
                                                     <td class="nk-tb-col tb-col-mb">{{ $equipment->description }}</td>
-                                                    {{-- <td class="nk-tb-col tb-col-mb">{{ $equipment->address }}</td> --}}
                                                     <td align="center" class="nk-tb-col tb-col-mb">
-                                                    <form action="{{ route('master.equipment.delete', $equipment->id) }}" method="post" class="d-inline">
-                                                    @method('delete')
-                                                    @csrf
-                                                        <button class="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus Penyewa" onclick="return confirm('Anda yakin untuk hapus?')">
-                                                            <em class="icon ni ni-trash"></em>
-                                                        </button>
-                                                    </form>
+                                                        <form action="{{ route('master.equipment.delete', $equipment->id) }}" method="post" class="d-inline">
+                                                        @method('delete')
+                                                        @csrf
+                                                            <button class="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus Penyewa" onclick="return confirm('Anda yakin untuk hapus?')">
+                                                                <em class="icon ni ni-trash"></em>
+                                                            </button>
+                                                        </form>
                                                     </td>
                                                 </tr>
                                             @endforeach

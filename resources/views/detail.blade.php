@@ -56,7 +56,7 @@
                         <em class="icon ni ni-whatsapp"></em> +{{ $renter->phone }}
                     </a>
                     <br>
-                    {{ $renter->user->email }}
+                    <a href="mailto:{{ $renter->user->email }}">{{ $renter->user->email }}</a>
                 </span>
             </p>
             <label for='' class='project-detail fs-6'>Peralatan Disewakan</label>

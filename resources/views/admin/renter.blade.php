@@ -159,13 +159,13 @@
                                                     <td class="nk-tb-col tb-col-mb">{{ $renter->user->email }}</td>
                                                     <td class="nk-tb-col tb-col-mb">{{ $renter->address }}</td>
                                                     <td align="center" class="nk-tb-col tb-col-mb">
-                                                    <form action="{{ route('profile.renter.delete', $renter->user_id) }}" method="post" class="d-inline">
-                                                    @method('delete')
-                                                    @csrf
-                                                        <button class="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus Penyewa" onclick="return confirm('Anda yakin untuk hapus?')">
-                                                            <em class="icon ni ni-trash"></em>
-                                                        </button>
-                                                    </form>
+                                                        <form action="{{ route('profile.renter.delete', $renter->user_id) }}" method="post" class="d-inline">
+                                                        @method('delete')
+                                                        @csrf
+                                                            <button class="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus Penyewa" onclick="return confirm('Anda yakin untuk hapus?')">
+                                                                <em class="icon ni ni-trash"></em>
+                                                            </button>
+                                                        </form>
                                                     </td>
                                                 </tr>
                                             @endforeach

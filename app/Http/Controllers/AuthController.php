@@ -53,19 +53,17 @@ class AuthController extends Controller
         $equipment = $request->equipment;
         $qty = $request->qty;
         $price = $request->price;
-
+        $data['logo'] = null;
         if($request->file('logo')){
             $extension  = request()->file('logo')->getClientOriginalExtension();
             $image_name = time() .'.' . $extension;
             $data['logo'] = $request->file('logo')->storePubliclyAs('logo', $image_name, 'public');
         }
-
         $user = User::create([
             'email' => $data['email'],
             'password' => $data['password'],
             'role' => 'renter',
         ]);
-
         $renter = Renter::create([
             'user_id' => $user->id,
             'city_id' => $data['city_id'],
@@ -75,7 +73,6 @@ class AuthController extends Controller
             'address' => $data['address'],
             'logo' => $data['logo'],
         ]);      
-
         for ($i=0; $i < count($equipment) ; $i++) {
             RenterEquipment::create([
                 'renter_id' => $renter->id,
@@ -84,7 +81,6 @@ class AuthController extends Controller
                 'price' => $price[$i],
             ]);
         }
-
         return to_route('login')->with('success','Berhasil registrasi, silahkan login.');
     }
 

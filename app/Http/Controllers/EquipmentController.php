@@ -60,7 +60,7 @@ class EquipmentController extends Controller
 
         MasterEquipment::create($data);
 
-        return to_route('master.equipment.index');
+        return to_route('master.equipment.index')->with('success','Berhasil tambah data master equipment!');
     }
 
     public function masterDelete($id)

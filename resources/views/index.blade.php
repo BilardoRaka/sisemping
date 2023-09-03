@@ -63,18 +63,14 @@
                                         ((strlen($renter->address)) >= 50) ? $short_address = (substr($renter->address,0,50)).'...' : $short_address = $renter->address;
                                     @endphp
                                     {{ $short_address }}
-                                    {{-- @if(strlen($renter->address) >= 100)
-                                        {{  }}
-                                    @else
-                                        {{ $renter->address }}
-                                    @endif --}}
                                 </span>
                                 <hr>
                                 <div class="project-details">
                                     <p>
                                         Kontak Penyewa
                                         <span class="sub-text">
-                                            {{ $renter->user->email }} <br>
+                                            <a href="mailto:{{ $renter->user->email }}"><em class="icon ni ni-mail"></em> {{ $renter->user->email }}</a> 
+                                            <br>
                                             <a href="https://wa.me/{{ $renter->phone }}?text=Halo,%20saya%20tertarik%20untuk%20menyewa%20peralatan%20camping%20yang%20anda%20tawarkan%20di%20Sisemping." target="_blank">
                                                 <em class="icon ni ni-whatsapp"></em> +{{ $renter->phone }}
                                             </a>

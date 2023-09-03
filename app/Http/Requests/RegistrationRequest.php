@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class RegistrationRequest extends FormRequest
 {
@@ -28,7 +29,12 @@ class RegistrationRequest extends FormRequest
             'city_id' => 'required',
             'description' => 'required',
             'address' => 'required',
-            'email' => 'required|max:50|email',
+            'email' => [
+                'required',
+                'max:50',
+                'email',
+                Rule::unique('users')
+            ],
             'password' => 'required|max:15',
 
         ];

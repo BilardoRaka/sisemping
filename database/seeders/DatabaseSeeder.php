@@ -52,7 +52,7 @@ class DatabaseSeeder extends Seeder
                 'city_id' => rand(1,514),
                 'name' => fake()->name(),
                 'description' => fake()->sentence(25, true),
-                'phone' => fake()->e164PhoneNumber(),
+                'phone' => rand(6285000000000,6285999999999),
                 'address' => fake()->address(),
             ]);
 
