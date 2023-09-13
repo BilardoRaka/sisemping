@@ -56,6 +56,15 @@
                     </li>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <li class="nav-item">
+                        <div class="form-group">
+                            <div class="form-control-wrap">
+                                <input type="text" class="form-control form-control-outlined @error('name') is-invalid @enderror" id="name" name="name">
+                                <label class="form-label-outlined" for="title">Nama Renter</label>
+                            </div>
+                        </div>
+                    </li>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
+                    <li class="nav-item">
                         <button type="submit" class="btn btn-dim btn-outline-primary"><em class="icon ni ni-search"></em></button>
                     </li>    
                 </form>

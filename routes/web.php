@@ -30,6 +30,7 @@ Route::post('/passchange',[AuthController::class, 'passwordChangeAttempt'])->nam
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
 Route::get('/detail/{id}', [DashboardController::class, 'detail'])->name('dashboard.detail');
 Route::post('/city', [DashboardController::class, 'fetchCity'])->name('dashboard.fetchCity');
+Route::post('/rating', [DashboardController::class, 'givenRate'])->name('dashboard.rating');
 
 // Admin Route
 Route::get('/renter', [ProfileController::class, 'renterPage'])->name('profile.renter.index')->middleware('auth');

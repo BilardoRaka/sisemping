@@ -36,6 +36,16 @@
         <div class="nk-block p-3">
             <div class="row g-gs">
                 @foreach($renters as $renter)
+                @php
+                $ratingAcc = 0;
+                $count = 0;
+                @endphp
+                @foreach($renter->renter_rating as $rating)
+                @php
+                $ratingAcc+= $rating->rating;
+                $count++
+                @endphp
+                @endforeach
                 <div class="col-sm-12 col-lg-6 col-xxl-4">
                     <div class="card card-bordered h-100">
                         <div class="card-inner">
@@ -52,7 +62,14 @@
                                             @endif
                                         </div>
                                         <div class="project-info">
-                                            <h6 class="title">{{ $renter->name }}</h6>
+                                            <h6 class="title">
+                                                {{ $renter->name }} 
+                                                @if($renter->renter_rating->count() != 0)
+                                                / Rating: {{ number_format($ratingAcc/$count,2,".",",") }}
+                                                @else
+                                                / Rating: 0.00
+                                                @endif
+                                            </h6>
                                             <span class="sub-text">{{ $renter->city->name }}</span>
                                         </div>
                                     </a>

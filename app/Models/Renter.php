@@ -25,4 +25,9 @@ class Renter extends Model
     {
         return $this->hasMany(RenterEquipment::class,'equipment_id');
     }
+
+    public function renter_rating()
+    {
+        return $this->hasMany(Comment::class,'renter_id');
+    }
 }
