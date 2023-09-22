@@ -11,16 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('comments', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table->id();
 
             $table->unsignedBigInteger('renter_id');
             $table->foreign('renter_id')->references('id')->on('renters')->onDelete('cascade');
+            $table->unsignedBigInteger('customer_id');
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
 
-            $table->string('name')->nullable();
-            $table->longText('comment')->nullable();
-            $table->float('rating')->nullable();
-
+            $table->json('equipment')->nullable();
+            $table->string('date')->nullable();
+            $table->float('total')->nullable();
+            $table->string('status')->default('pending')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('comments');
+        Schema::dropIfExists('orders');
     }
 };

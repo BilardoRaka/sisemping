@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('renter_equipment', function (Blueprint $table) {
             $table->id();
 
-            $table->integer('renter_id')->unsigned();
+            $table->unsignedBigInteger('renter_id');
             $table->foreign('renter_id')->references('id')->on('renters')->onDelete('cascade');
-            $table->integer('equipment_id')->unsigned();
+            $table->unsignedBigInteger('equipment_id');
             $table->foreign('equipment_id')->references('id')->on('master_equipment')->onDelete('cascade');
 
             $table->bigInteger('qty');

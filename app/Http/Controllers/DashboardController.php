@@ -31,7 +31,7 @@ class DashboardController extends Controller
         }
 
         if($name){
-            $renter = $renter->where('name', 'iLIKE', "%{$name}%")->latest()->paginate(6)->withQueryString();
+            $renter = $renter->where('name', 'LIKE', "%{$name}%")->latest()->paginate(6)->withQueryString();
         } else {
             $renter = $renter->latest()->paginate(6)->withQueryString();
         }

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CustomerRegistrationRequest;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\PasswordRequest;
 use App\Http\Requests\RegistrationRequest;
 use App\Models\City;
+use App\Models\Customer;
 use App\Models\MasterEquipment;
 use App\Models\Renter;
 use App\Models\RenterEquipment;
@@ -81,6 +83,25 @@ class AuthController extends Controller
                 'price' => $price[$i],
             ]);
         }
+        return to_route('login')->with('success','Berhasil registrasi, silahkan login.');
+    }
+
+    public function registrationAttemptCustomer(CustomerRegistrationRequest $request)
+    {
+        $data = $request->validated();
+
+        $user = User::create([
+            'email' => $data['email'],
+            'password' => $data['password'],
+            'role' => 'customer',
+        ]);
+
+        Customer::create([
+            'name' => $data['name'],
+            'phone' => $data['phone'],
+            'user_id' => $user->id,
+        ]);
+
         return to_route('login')->with('success','Berhasil registrasi, silahkan login.');
     }
 

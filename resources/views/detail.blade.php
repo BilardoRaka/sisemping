@@ -143,12 +143,14 @@
                     </tbody>
                 </table>
             </div>
+            <a href="{{ route('payment.get',$renter->id) }}" class="btn btn-dim btn-outline-primary mb-3">Pesan Peralatan Kemah</a>
             @if($renter->renter_rating->count() != 0 )
             <div class="bg-white rounded shadow p-3 mb-3">
                 <h5>Yang orang lain katakan tentang penyewa ini.</h5>
                 <table class='table table-striped'>
                     <tbody>
                     @foreach($renter->renter_rating as $rating)
+                    @if($loop->iteration < 6)
                     <tr class="nk-tb-item">
                         <td>
                             <b>
@@ -158,47 +160,42 @@
                             {{ $rating->comment }}
                         </td>
                     </tr>
+                    @endif
                     @endforeach
                     </tbody>
                 </table>
             </div>
             @endif
-            <div class="bg-white rounded shadow p-3 mb-3">
-                <form action="{{ route('dashboard.rating') }}" method="POST">
-                @csrf
-                <input type="hidden" name="renter_id" value="{{ $renter->id }}">
-                    <h5>Berikan Komentar anda.</h5><hr>
-                    <div class="form-group">
-                        <span class="star-rating">
-                            <input type="radio" name="rating" value="1" required><i></i>
-                            <input type="radio" name="rating" value="2"><i></i>
-                            <input type="radio" name="rating" value="3"><i></i>
-                            <input type="radio" name="rating" value="4"><i></i>
-                            <input type="radio" name="rating" value="5"><i></i>
-                        </span>
-                    </div>
-                    <div class="form-group col-4">
-                        <div class="form-control-wrap">
-                            <input type="text" class="form-control form-control-lg form-control-outlined @error('name') is-invalid @enderror" id="name" name="name">
-                            <label class="form-label-outlined" for="title">Nama</label>
-                            @error('name')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+            @auth
+                @if(auth()->user()->role == 'customer')
+                <div class="bg-white rounded shadow p-3 mb-3">
+                    <form action="{{ route('dashboard.rating') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="renter_id" value="{{ $renter->id }}">
+                    <input type="hidden" id="name" name="name" value="{{ auth()->user()->customer->name }}">
+                        <h5>Berikan Komentar anda.</h5><hr>
+                        <div class="form-group">
+                            <span class="star-rating">
+                                <input type="radio" name="rating" value="1" required><i></i>
+                                <input type="radio" name="rating" value="2"><i></i>
+                                <input type="radio" name="rating" value="3"><i></i>
+                                <input type="radio" name="rating" value="4"><i></i>
+                                <input type="radio" name="rating" value="5"><i></i>
+                            </span>
                         </div>
-                    </div>
-                    <div class="form-group col-12">
-                        <label class="form-label" for="comment">Komentar</label>
-                        <div class="form-control-wrap">
-                            <textarea class="form-control form-control-lg" id="comment" name="comment">Komentar.</textarea>
+                        <div class="form-group col-12">
+                            <label class="form-label" for="comment">Komentar</label>
+                            <div class="form-control-wrap">
+                                <textarea class="form-control form-control-lg" id="comment" name="comment">Komentar.</textarea>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-dim btn-outline-primary">Buat Rating</button>
-                    </div>
-                </form>
-            </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-dim btn-outline-primary">Buat Rating</button>
+                        </div>
+                    </form>
+                </div>
+                @endif
+            @endauth
             <a href="{{ route('dashboard.index') }}" class='btn btn-dim btn-outline-danger'>Kembali</a>
         </div>
 

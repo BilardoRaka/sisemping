@@ -82,8 +82,9 @@
                     <div class="user-toggle">
                         <div class="user-avatar sm">
                             <span>
-                                @if(auth()->user()->role == 'renter')
+                                @if(auth()->user()->role != 'admin')
                                 {{ substr(auth()->user()->renter?->name,0,2) }}
+                                {{ substr(auth()->user()->customer?->name,0,2) }}
                                 @else
                                 Ad
                                 @endif
@@ -92,8 +93,9 @@
                         <div class="user-info d-none d-md-block">
                             <div class="user-status">{{ ucfirst(auth()->user()->role) }}</div>
                             <div class="user-name dropdown-indicator">
-                                @if(auth()->user()->role == 'renter')
+                                @if(auth()->user()->role != 'admin')
                                 {{ auth()->user()->renter?->name }}
+                                {{ auth()->user()->customer?->name }}
                                 @else
                                 Administrator
                                 @endif
@@ -106,8 +108,9 @@
                         <div class="user-card">
                             <div class="user-avatar">
                                 <span>
-                                    @if(auth()->user()->role == 'renter')
+                                    @if(auth()->user()->role != 'admin')
                                     {{ substr(auth()->user()->renter?->name,0,2) }}
+                                    {{ substr(auth()->user()->customer?->name,0,2) }}
                                     @else
                                     Ad
                                     @endif
@@ -115,8 +118,9 @@
                             </div>
                             <div class="user-info">
                                 <span class="lead-text">
-                                    @if(auth()->user()->role == 'renter')
+                                    @if(auth()->user()->role != 'admin')
                                     {{ auth()->user()->renter?->name }}
+                                    {{ auth()->user()->customer?->name }}
                                     @else
                                     Administrator
                                     @endif
@@ -139,6 +143,11 @@
                             <li>
                                 <a href="{{ route('profile.renter.index') }}"><em class="icon ni ni-user-remove"></em><span>Data Renter</span></a>
                                 <a href="{{ route('master.equipment.index') }}"><em class="icon ni ni-monitor"></em><span>Master Equipment</span></a>
+                            </li>
+                            @endif
+                            @if(auth()->user()->role == 'customer')
+                            <li>
+                                <a href="{{ route('payment.history') }}"><em class="icon ni ni-cart"></em><span>Data Pembayaran</span></a>
                             </li>
                             @endif
                             <li>

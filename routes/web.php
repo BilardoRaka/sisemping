@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EquipmentController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +23,7 @@ Route::get('/login', [AuthController::class, 'loginPage'])->name('login')->middl
 Route::post('/login', [AuthController::class, 'loginAttempt'])->name('login.attempt')->middleware('guest');
 Route::get('/registration', [AuthController::class, 'registrationPage'])->name('registration')->middleware('guest');
 Route::post('/registration', [AuthController::class, 'registrationAttempt'])->name('registration.attempt')->middleware('guest');
+Route::post('/registration/customer', [AuthController::class, 'registrationAttemptCustomer'])->name('registration.attemptCustomer')->middleware('guest');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
 Route::get('/passchange',[AuthController::class, 'passwordChange'])->name('passchange')->middleware('auth');
 Route::post('/passchange',[AuthController::class, 'passwordChangeAttempt'])->name('passchange.attempt')->middleware('auth');
@@ -45,3 +47,11 @@ Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index
 Route::post('/profile', [ProfileController::class, 'profileUpdate'])->name('profile.update')->middleware('auth');
 Route::get('/equipment', [EquipmentController::class, 'index'])->name('equipment.index')->middleware('auth');
 Route::post('/equipment', [EquipmentController::class, 'equipmentUpdate'])->name('equipment.update')->middleware('auth');
+
+// Payment Route
+Route::get('/detail/{id}/payment', [PaymentController::class, 'getPayment'])->name('payment.get');
+Route::post('/detail/{id}/payment', [PaymentController::class, 'postPayment'])->name('payment.post');
+Route::get('/payment/invoice/{reference_id}', [PaymentController::class, 'invoice'])->name('payment.invoice');
+
+// Customer Route
+Route::get('/customer/payment', [PaymentController::class, 'historyPayment'])->name('payment.history');

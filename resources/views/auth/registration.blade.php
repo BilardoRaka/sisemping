@@ -40,10 +40,20 @@
                 <div class="nk-content">
                     <div class="container mt-3">
                         <div class="nk-block">
-                            <div class="card card-bordered card-stretch">
+                            <div class="form-group col-4">
+                                <div class="form-control-wrap">
+                                    <select name="role" id="role" class="form-select js-select2" data-ui="lg" onchange="roleForm(this.value)">
+                                        <option value=" " disabled selected>Pilih Jenis Akun</option>
+                                        <option value="renter">Renter</option>
+                                        <option value="customer">Customer</option>
+                                    </select>
+                                    <label class="form-label-outlined" for="company">Jenis Akun</label>
+                                </div>
+                            </div>
+                            <div class="card card-bordered card-stretch renter" hidden>
                                 <div class="card-inner-group">
                                     <div class="card-inner p-3">
-                                        <h6>Registrasi Penyewa Peralatan Camping</h6>
+                                        <h6>Registrasi Penyedia Sewa Peralatan Camping</h6>
                                         <hr>
                                         <form action="{{ route('registration.attempt') }}" method="POST" enctype="multipart/form-data">
                                         @csrf
@@ -191,6 +201,74 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="card card-bordered card-stretch customer" hidden>
+                                <div class="card-inner-group">
+                                    <div class="card-inner p-3">
+                                        <h6>Registrasi Customer Penyewa Peralatan Camping</h6>
+                                        <hr>
+                                        <form action="{{ route('registration.attemptCustomer') }}" method="POST">
+                                        @csrf
+                                            <div class="row">
+                                                <div class="form-group col-6">
+                                                    <div class="form-control-wrap">
+                                                        <input type="text" class="form-control form-control-lg form-control-outlined @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}">
+                                                        <label class="form-label-outlined" for="title">Nama Customer</label>
+                                                        @error('name')
+                                                            <div class="invalid-feedback">
+                                                                {{ $message }}
+                                                            </div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-6">
+                                                    <div class="form-control-wrap">
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text" id="phone">+62</span>
+                                                            </div>
+                                                            <input type="text" class="form-control form-control-lg @error('phone') is-invalid @enderror" placeholder="Nomor Telepon" value="{{ old('phone') }}" onkeydown="validateNumber()" name="phone" required>
+                                                            @error('phone')
+                                                            <div class="invalid-feedback">
+                                                                {{ $message }}
+                                                            </div>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-6">
+                                                    <div class="form-control-wrap">
+                                                        <input type="text" class="form-control form-control-lg form-control-outlined @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}">
+                                                        <label class="form-label-outlined" for="title">Email</label>
+                                                        @error('email')
+                                                            <div class="invalid-feedback">
+                                                                {{ $message }}
+                                                            </div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-6">
+                                                    <div class="form-control-wrap">
+                                                        <a href="#" class="form-icon form-icon-right passcode-switch lg" data-target="password">
+                                                            <em class="passcode-icon icon-show icon ni ni-eye"></em>
+                                                            <em class="passcode-icon icon-hide icon ni ni-eye-off"></em>
+                                                        </a>
+                                                        <input type="password" class="form-control form-control-lg form-control-outlined @error('password') is-invalid @enderror" id="password" name="password">
+                                                        <label class="form-label-outlined" for="password">Password</label>
+                                                        @error('password')
+                                                            <div class="invalid-feedback">
+                                                                {{ $message }}
+                                                            </div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="form-group mt-3">
+                                                    <button type="submit" class="btn btn-dim btn-outline-primary">Registrasi</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -258,6 +336,18 @@
     $('tbody').on('click', '.deleteRow', function(){
         $(this).parent().parent().remove();
     });
+
+    function roleForm(value){
+        // console.log(value);
+        if(value != 'renter'){
+            $('div.renter').prop('hidden', true);
+            $('div.customer').prop('hidden', false);
+        } else {
+            $('div.customer').prop('hidden', true);
+            $('div.renter').prop('hidden', false);
+        }
+    }
+
     </script>
 
 </html>

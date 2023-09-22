@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('comments', function (Blueprint $table) {
+        Schema::create('customers', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('renter_id');
-            $table->foreign('renter_id')->references('id')->on('renters')->onDelete('cascade');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->string('name')->nullable();
-            $table->longText('comment')->nullable();
-            $table->float('rating')->nullable();
+            $table->string('phone')->nullable();
 
             $table->timestamps();
         });
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('comments');
+        Schema::dropIfExists('customers');
     }
 };
